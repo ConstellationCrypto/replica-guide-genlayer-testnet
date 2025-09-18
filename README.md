@@ -20,3 +20,17 @@ localhost:3060
 
 - The `docker-compose.yml` also includes services for prometheus and grafana, but these aren't necessary to spin up
 - The postgres user password should probably be changed from the default value (`POSTGRES_PASSWORD` env variable)
+
+
+## Syncing from DB Snapshot
+
+Sep 18, 2025: https://constellationlabs-dashboard-beta.s3.us-west-2.amazonaws.com/genlayer-testnet/backup.sql.gz
+
+```bash
+wget https://constellationlabs-dashboard-beta.s3.us-west-2.amazonaws.com/genlayer-testnet/backup.sql.gz
+gunzip backup.sql.gz
+mv backup.sql PATH_TO_REPO/sql/backup.sql
+
+# Remember to clear existing volumes and run this before docker compose up
+# The pg_restore will take a while
+```
